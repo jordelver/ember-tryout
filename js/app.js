@@ -19,6 +19,14 @@ App.Router = Ember.Router.extend({
       route: '/:githubUserName',
       connectOutlets: function(router, context){
         router.get('applicationController').connectOutlet('oneContributor', context);
+      },
+      serialize: function(router, context){
+        return {
+          githubUserName: context.get('login')
+        }
+      },
+      deserialize: function(router, urlParams){
+        return App.Contributor.findOne(urlParams.githubUserName);
       }
     })
   })
@@ -45,6 +53,22 @@ App.Contributor.reopenClass({
     });
 
     return this.allContributors;
+  },
+  findOne: function(username){
+    var contributor = App.Contributor.create({
+      login: username
+    });
+
+    $.ajax({
+      url: 'https://api.github.com/repos/emberjs/ember.js/contributors',
+      dataType: 'jsonp',
+      context: contributor,
+      success: function(response){
+        this.setProperties(response.data.findProperty('login', username));
+      }
+    })
+
+    return contributor;
   }
 });
 
