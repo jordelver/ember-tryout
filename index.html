@@ -21,7 +21,14 @@
 </head>
 <body>
   <script type="text/x-handlebars" data-template-name="application">
-    <h1>Hello from Ember.js</h1>
+    <h1>Ember Committers</h1>
+    {{outlet}}
+  </script>
+
+  <script type="text/x-handlebars" data-template-name="contributors">
+    {{#each person in controller}}
+      {{person.login}}
+    {{/each}}
   </script>
 
   <!-- The missing protocol means that it will match the current protocol, either http or https. If running locally, we use the local jQuery. -->
