@@ -6,11 +6,19 @@ App.ApplicationView = Ember.View.extend({
 });
 
 App.Router = Ember.Router.extend({
+  enableLogging: true,
   root: Ember.Route.extend({
-    index: Ember.Route.extend({
+    contributors: Ember.Route.extend({
       route: '/',
+      showContributor: Ember.Route.transitionTo('aContributor'),
       connectOutlets: function(router) {
         router.get('applicationController').connectOutlet('allContributors', App.Contributor.find());
+      }
+    }),
+    aContributor: Ember.Route.extend({
+      route: '/:githubUserName',
+      connectOutlets: function(router, context){
+        router.get('applicationController').connectOutlet('oneContributor', context);
       }
     })
   })
@@ -39,5 +47,10 @@ App.Contributor.reopenClass({
     return this.allContributors;
   }
 });
+
+App.OneContributorView = Ember.View.extend({
+  templateName: 'a-contributor'
+});
+App.OneContributorController = Ember.ObjectController.extend();
 
 App.initialize();

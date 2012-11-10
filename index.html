@@ -27,8 +27,12 @@
 
   <script type="text/x-handlebars" data-template-name="contributors">
     {{#each person in controller}}
-      {{person.login}}
+      <a {{action showContributor person}}>{{person.login}}</a>
     {{/each}}
+  </script>
+
+  <script type="text/x-handlebars" data-template-name="a-contributor">
+    {{login}} - {{contributions}} contributions to Ember.js
   </script>
 
   <!-- The missing protocol means that it will match the current protocol, either http or https. If running locally, we use the local jQuery. -->
