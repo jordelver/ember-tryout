@@ -1,1 +1,5 @@
-Download the ZIP to get started with Ember.js: <https://github.com/emberjs/starter-kit/downloads>
+# Ember.js Tryout
+
+Following the Tutorial at http://trek.github.com/
+
+Started from the Ember.js starter kit at: <https://github.com/emberjs/starter-kit/downloads>
